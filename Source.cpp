@@ -43,6 +43,9 @@ int main() {
 	}
 
 	glfwTerminate();
+
+	std::cout << "I have added this line" << std::endl;
+
 	return 0;
 
 
