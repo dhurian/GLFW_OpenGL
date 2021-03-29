@@ -9,11 +9,7 @@ const GLint WIDTH = 800, HEIGHT = 600;
 int main() {
 
 	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+
 
 	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Learn OpenGL", nullptr, nullptr);
 
@@ -42,7 +38,7 @@ int main() {
 		0.5,-0.5,0.0
 	};
 	while (!glfwWindowShouldClose(window)) {
-		glfwPollEvents();
+
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
@@ -54,11 +50,11 @@ int main() {
 
  
 		glfwSwapBuffers(window);
+
+		glfwPollEvents();
 	}
 
 	glfwTerminate();
-
-	std::cout << "I have added this line" << std::endl;
 
 	return 0;
 
