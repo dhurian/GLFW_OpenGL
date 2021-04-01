@@ -1,9 +1,9 @@
 #include <iostream>
 #define GLEW_STATIC
 
-#include <gl/glew.h>
-#include <GLFW/glfw3.h>
 
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 640
 
