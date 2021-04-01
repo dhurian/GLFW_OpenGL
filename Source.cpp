@@ -39,17 +39,22 @@ int main() {
 	glOrtho(0, SCREEN_WIDTH, 0, SCREEN_HEIGHT, 0, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	float lines[] = {
-		0.0,0.0,0.0,
-		1.0,1.0,0
+	GLfloat lines[] = {
+		10.0,10.0,0.0,
+		100.0,100.0,0
 	};
 	while (!glfwWindowShouldClose(window)) {
 
 		glClear(GL_COLOR_BUFFER_BIT);
-
+		glEnable(GL_LINE_SMOOTH);
 		glEnableClientState(GL_VERTEX_ARRAY);
+		
+		glLineWidth(10);
+		glVertexPointer(3, GL_FLOAT, 0, lines);
+		glDrawArrays(GL_LINES, 0, 2);
 
 		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisable(GL_LINE_SMOOTH);
 
 
  
