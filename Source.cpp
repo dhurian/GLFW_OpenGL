@@ -40,10 +40,26 @@ int main() {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	float array[] = {
+		20,100,0,
+		100,300,0,
+		100,50,0,
+		320,10,0,
+		40,40,0
+	};
+	glLineWidth(10);
+	glPointSize(10);
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
 	while (!glfwWindowShouldClose(window)) {
-
+		glEnable(GL_POINT_SMOOTH);
 		glClear(GL_COLOR_BUFFER_BIT);
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glVertexPointer(3, GL_FLOAT, 0, array);
+		glDrawArrays(GL_POLYGON, 0, 5);
 
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisable(GL_POINT_SMOOTH);
 
  
 		glfwSwapBuffers(window);
