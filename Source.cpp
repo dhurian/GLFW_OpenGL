@@ -40,9 +40,24 @@ int main() {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+	float triangleVertices[] = {
+
+		20,100,0,
+		100,300,0,
+		500,50,0,
+		600,700,0,
+		320,800,0
+	};
 	while (!glfwWindowShouldClose(window)) {
 
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glVertexPointer(3, GL_FLOAT, 0, triangleVertices);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0,5);
+		glDisableClientState(GL_VERTEX_ARRAY);
 
 
  
