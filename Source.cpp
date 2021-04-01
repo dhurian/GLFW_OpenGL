@@ -39,30 +39,19 @@ int main() {
 	glOrtho(0, SCREEN_WIDTH, 0, SCREEN_HEIGHT, 0, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	GLfloat pointVertex[] = {SCREEN_WIDTH/2, SCREEN_HEIGHT/2};
-	GLfloat pointVertex2[] = { SCREEN_WIDTH *0.75, SCREEN_HEIGHT / 2 };
+	float lines[] = {
+		0.0,0.0,0.0,
+		1.0,1.0,0
+	};
 	while (!glfwWindowShouldClose(window)) {
 
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glEnableClientState(GL_VERTEX_ARRAY);
-		glPointSize(50);
-		glVertexPointer(2, GL_FLOAT, 0, pointVertex);
-		glDrawArrays(GL_POINTS, 0, 1);
 
 		glDisableClientState(GL_VERTEX_ARRAY);
 
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glPointSize(50);
-		glVertexPointer(2, GL_FLOAT, 0, pointVertex2);
-		glDrawArrays(GL_POINTS, 0, 1);
 
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glfwGetFramebufferSize(window, &screenWidth, &screenHeight);
-		 pointVertex[0] =  screenWidth / 2;
-		 pointVertex[1] = screenHeight / 2;
-		 pointVertex2[0] = screenWidth / 2;
-		 pointVertex2[1] = screenHeight*0.75;
  
 		glfwSwapBuffers(window);
 
