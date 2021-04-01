@@ -5,7 +5,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 640
+#define SCREEN_HEIGHT 800
 
 int main() {
 
@@ -39,17 +39,23 @@ int main() {
 	glOrtho(0, SCREEN_WIDTH, 0, SCREEN_HEIGHT, 0, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-
+	float vertices[] = {
+		10.0,10.0,0.0,
+		200.0,200.0,0.0,
+		300,400,0,
+		400,700,0
+	};
 
 	while (!glfwWindowShouldClose(window)) {
 
 		glClear(GL_COLOR_BUFFER_BIT);
-
+		glLineWidth(10);
+		glEnable(GL_LINE_SMOOTH);
 		glEnableClientState(GL_VERTEX_ARRAY);
-
-
+		glVertexPointer(3, GL_FLOAT, 0, vertices);
+		glDrawArrays(GL_LINE_LOOP, 0, 4);
 		glDisableClientState(GL_VERTEX_ARRAY);
-
+		glDisable(GL_LINE_SMOOTH);
  
 		glfwSwapBuffers(window);
 
