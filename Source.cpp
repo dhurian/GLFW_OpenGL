@@ -10,6 +10,7 @@
 
 void KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods);
 void drawCircle(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, GLint numberOfSides);
+void characterCallBack(GLFWwindow* window, unsigned int keyCode);
 
 void drawQuad(GLfloat* x, GLint numberOfPoints);
 
@@ -20,9 +21,9 @@ int main() {
 
 
 	GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Learn OpenGL", nullptr, nullptr);
-	glfwSetKeyCallback(window, KeyCallBack);
-	glfwSetInputMode(window, GLFW_STICKY_KEYS, 1);
-
+	//glfwSetKeyCallback(window, KeyCallBack);
+	//glfwSetInputMode(window, GLFW_STICKY_KEYS, 1);
+	glfwSetCharCallback(window, characterCallBack);
 
 	int screenWidth, screenHeight;
 	glfwGetFramebufferSize(window, &screenWidth, &screenHeight);
@@ -150,4 +151,10 @@ void KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods
 		
 
 }
+}
+
+
+void characterCallBack(GLFWwindow* window, unsigned int keyCode) {
+
+	std::cout << keyCode << std::endl;
 }
