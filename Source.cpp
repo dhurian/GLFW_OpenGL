@@ -78,7 +78,9 @@ int main() {
 	glfwSetCursor(window, cursor);
 	double xpos = 0, ypos=0;
 
+	double seconds = 0;
 
+	glfwSetTime(45);
 
 	while (!glfwWindowShouldClose(window)) {
 
@@ -87,8 +89,10 @@ int main() {
 		//drawCircle(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0, 200,10);
 		drawQuad(vertices, 6);
 		glfwGetCursorPos(window, &xpos, &ypos);
-		std::cout << xpos;
-		
+		//std::cout << xpos;
+		seconds = glfwGetTime();
+		std::cout << seconds << std::endl;
+
 		glfwSwapBuffers(window);
 	
 
