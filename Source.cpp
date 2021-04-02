@@ -50,7 +50,7 @@ int main() {
 
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		drawCircle(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0, 200,10);
+		drawCircle(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0, 200,5);
  
 		glfwSwapBuffers(window);
 
