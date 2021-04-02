@@ -86,10 +86,11 @@ int main() {
 
 		//drawCircle(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0, 200,10);
 		drawQuad(vertices, 6);
-		glfwSwapBuffers(window);
 		glfwGetCursorPos(window, &xpos, &ypos);
-
-		std::cout << xpos<<std::endl;
+		std::cout << xpos;
+		
+		glfwSwapBuffers(window);
+	
 
 		glfwPollEvents();
 	}
