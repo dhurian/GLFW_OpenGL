@@ -11,8 +11,11 @@
 void KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods);
 void drawCircle(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, GLint numberOfSides);
 
+static void cursorPositionCallBack(GLFWwindow* window, double xpos, double ypos);
+void cursorEnterCallBack(GLFWwindow* window, int entered);
 void drawQuad(GLfloat* x, GLint numberOfPoints);
-
+void MouseButtonCallBack(GLFWwindow* window, int button, int action, int mods);
+void scrollCallBack(GLFWwindow* window, double xOffset, double yOffset);
 
 int main() {
 
@@ -22,8 +25,12 @@ int main() {
 	GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Learn OpenGL", nullptr, nullptr);
 	glfwSetKeyCallback(window, KeyCallBack);
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, 1);
-
-
+	glfwSetCursorPosCallback(window, cursorPositionCallBack);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	glfwSetCursorEnterCallback(window, cursorEnterCallBack);
+	glfwSetMouseButtonCallback(window, MouseButtonCallBack);
+	glfwSetScrollCallback(window, scrollCallBack);
+	glfwSetInputMode(window, GLFW_STICKY_MOUSE_BUTTONS, 1);
 	int screenWidth, screenHeight;
 	glfwGetFramebufferSize(window, &screenWidth, &screenHeight);
 	if(nullptr==window)
@@ -60,6 +67,19 @@ int main() {
 		x0 - 100,y0 - 200,0.0
 
 	};
+
+	unsigned char pixels[16 * 16 * 4];
+	memset(pixels, 0xff, sizeof(pixels));
+	GLFWimage image;
+	image.width = 16;
+	image.height = 16;
+	image.pixels = pixels;
+	GLFWcursor* cursor = glfwCreateCursor(&image, 0, 0);
+	glfwSetCursor(window, cursor);
+	double xpos = 0, ypos=0;
+
+
+
 	while (!glfwWindowShouldClose(window)) {
 
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -67,6 +87,9 @@ int main() {
 		//drawCircle(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0, 200,10);
 		drawQuad(vertices, 6);
 		glfwSwapBuffers(window);
+		glfwGetCursorPos(window, &xpos, &ypos);
+
+		std::cout << xpos<<std::endl;
 
 		glfwPollEvents();
 	}
@@ -150,4 +173,50 @@ void KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods
 		
 
 }
+}
+
+static void cursorPositionCallBack(GLFWwindow* window, double xpos, double ypos) {
+
+	//std::cout << "X Position " << xpos << "," << "Y Position " << ypos << std::endl;
+
+}
+
+void cursorEnterCallBack(GLFWwindow* window, int entered) {
+
+	if (entered) {
+		std::cout << "Entered Window" << std::endl;
+	}	if (!entered) {
+		std::cout << "left Window" << std::endl;
+	}
+}
+
+void MouseButtonCallBack(GLFWwindow* window, int button, int action, int mods) {
+
+	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS) {
+
+		std::cout << "Right BUtton Presseed\n";
+	}
+
+	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE) {
+
+		std::cout << "Right BUtton Released\n";
+	}
+
+
+	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+
+		std::cout << "LEFT BUtton Presseed\n";
+	}
+
+
+	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE) {
+
+		std::cout << "LEFT BUtton release\n";
+	}
+
+}
+
+void scrollCallBack(GLFWwindow* window, double xOffset, double yOffset) {
+	std::cout << xOffset << ":" << yOffset << "\n";
+
 }
