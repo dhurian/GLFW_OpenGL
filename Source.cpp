@@ -10,7 +10,7 @@
 
 void drawCircle(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, GLint numberOfSides);
 
-
+void drawQuad(GLfloat* x, GLint numberOfPoints);
 
 
 int main() {
@@ -45,13 +45,23 @@ int main() {
 	glOrtho(0, SCREEN_WIDTH, 0, SCREEN_HEIGHT, 0, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+	float x0 = SCREEN_WIDTH / 2;
+	float y0 = SCREEN_HEIGHT / 2;
+	GLfloat vertices[] = {
+		x0 - 100,y0 - 100,0.0,
+		x0 + 100,y0 - 100,0.0,
+		x0 - 100,y0 - 150,0.0,
+		x0 + 100,y0 - 150,0.0,
+		x0 - 150,y0 - 200,0.0,
+		x0 - 100,y0 - 200,0.0
 
+	};
 	while (!glfwWindowShouldClose(window)) {
 
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		drawCircle(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0, 200,10);
- 
+		//drawCircle(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0, 200,10);
+		drawQuad(vertices, 6);
 		glfwSwapBuffers(window);
 
 		glfwPollEvents();
@@ -97,6 +107,25 @@ void drawCircle(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, GLint numberOfS
 		glVertexPointer(3, GL_FLOAT, 0, allCircleVertices);
 		glDrawArrays(GL_TRIANGLE_FAN, 0, numberOfVertices);
 		glDisableClientState(GL_VERTEX_ARRAY);
+
+
+}
+
+void drawQuad(GLfloat *x, GLint numberOfPoints) {
+
+	GLfloat points[300];
+	for (int i = 0; i < numberOfPoints; i++) {
+		points[i * 3] = x[i*3];
+		points[i * 3+1] = x[i*3+1];
+		points[i * 3+2] = 0;
+	}
+	
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, points);
+	glDrawArrays(GL_QUAD_STRIP, 0, numberOfPoints);
+	glDisableClientState(GL_VERTEX_ARRAY);
+
 
 
 }
