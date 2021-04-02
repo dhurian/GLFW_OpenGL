@@ -50,7 +50,7 @@ int main() {
 
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		drawCircle(100, 100, 0, 200, 4);
+		drawCircle(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0, 200,10);
  
 		glfwSwapBuffers(window);
 
@@ -69,12 +69,12 @@ int main() {
 
 void drawCircle(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, GLint numberOfSides) {
 
-	GLint numberOfVertices = 5;
+	GLint numberOfVertices = numberOfSides+1;
 
 	GLfloat doublePi = 2.0 * 3.1415;
-	GLfloat circleVerticesX[5];
-	GLfloat circleVerticesY[5];
-	GLfloat circleVerticesZ[5];
+	GLfloat circleVerticesX[100];
+	GLfloat circleVerticesY[100];
+	GLfloat circleVerticesZ[100];
 
 
 
@@ -84,18 +84,18 @@ void drawCircle(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, GLint numberOfS
 		circleVerticesY[i] = y + (radius * sin(i * doublePi / numberOfSides));
 		circleVerticesZ[i] = z;
 	}
-		GLfloat allCircleVertices[15];
+		GLfloat allCircleVertices[300];
 
 		for (int i = 0; i < numberOfVertices; i++) {
 			allCircleVertices[i * 3] = circleVerticesX[i];
 			allCircleVertices[i * 3+1] = circleVerticesY[i];
-			allCircleVertices[i * 3+2] = circleVerticesY[i];
+			allCircleVertices[i * 3+2] = circleVerticesZ[i];
 
 		}
 
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(3, GL_FLOAT, 0, allCircleVertices);
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, numberOfVertices);
+		glDrawArrays(GL_TRIANGLE_FAN, 0, numberOfVertices);
 		glDisableClientState(GL_VERTEX_ARRAY);
 
 
