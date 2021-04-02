@@ -78,8 +78,12 @@ int main() {
 	glfwSetCursor(window, cursor);
 	double xpos = 0, ypos=0;
 
+	glfwSetClipboardString(window, "This is a string");
+	const char* text = glfwGetClipboardString(window);
+	if (text){
 
-
+		std::cout << text << std::endl;
+		}
 	while (!glfwWindowShouldClose(window)) {
 
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -87,7 +91,12 @@ int main() {
 		//drawCircle(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0, 200,10);
 		drawQuad(vertices, 6);
 		glfwGetCursorPos(window, &xpos, &ypos);
-		std::cout << xpos;
+		//std::cout << xpos;
+		const char* text = glfwGetClipboardString(window);
+		if (text) {
+
+			std::cout << text << std::endl;
+		}
 		
 		glfwSwapBuffers(window);
 	
