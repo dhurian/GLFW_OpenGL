@@ -1,8 +1,10 @@
 #include <iostream>
-#include <math.h>
+#define GLEW_STATIC
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#define M_PI 3.1415
+#include <math.h>
+
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 640
 
@@ -48,7 +50,7 @@ int main() {
 
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		drawCircle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0, 120, 360);
+		drawCircle(100, 100, 0, 200, 4);
  
 		glfwSwapBuffers(window);
 
@@ -67,24 +69,22 @@ int main() {
 
 void drawCircle(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, GLint numberOfSides) {
 
-	GLint numberOfVertices = numberOfSides+2;
+	GLint numberOfVertices = 5;
 
-	GLfloat doublePi = 2.0f * M_PI;
-	GLfloat circleVerticesX[100];
-	GLfloat circleVerticesY[100];
-	GLfloat circleVerticesZ[100];
+	GLfloat doublePi = 2.0 * 3.1415;
+	GLfloat circleVerticesX[5];
+	GLfloat circleVerticesY[5];
+	GLfloat circleVerticesZ[5];
 
-	circleVerticesX[0] = x;
-	circleVerticesY[0] = y;
-	circleVerticesZ[0] = z;
 
-	for (int i = 1; i < numberOfVertices; i++) {
+
+	for (int i = 0; i < numberOfVertices; i++) {
 
 		circleVerticesX[i] = x + (radius * cos(i * doublePi / numberOfSides));
-		circleVerticesY[i] = y + (radius * cos(i * doublePi / numberOfSides));
+		circleVerticesY[i] = y + (radius * sin(i * doublePi / numberOfSides));
 		circleVerticesZ[i] = z;
 	}
-		GLfloat allCircleVertices[3000 * 3];
+		GLfloat allCircleVertices[15];
 
 		for (int i = 0; i < numberOfVertices; i++) {
 			allCircleVertices[i * 3] = circleVerticesX[i];
@@ -95,7 +95,7 @@ void drawCircle(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, GLint numberOfS
 
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(3, GL_FLOAT, 0, allCircleVertices);
-		glDrawArrays(GL_TRIANGLE_FAN, 0, numberOfVertices);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, numberOfVertices);
 		glDisableClientState(GL_VERTEX_ARRAY);
 
 
