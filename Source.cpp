@@ -8,6 +8,7 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 640
 
+void KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods);
 void drawCircle(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, GLint numberOfSides);
 
 void drawQuad(GLfloat* x, GLint numberOfPoints);
@@ -19,6 +20,9 @@ int main() {
 
 
 	GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Learn OpenGL", nullptr, nullptr);
+	glfwSetKeyCallback(window, KeyCallBack);
+	glfwSetInputMode(window, GLFW_STICKY_KEYS, 1);
+
 
 	int screenWidth, screenHeight;
 	glfwGetFramebufferSize(window, &screenWidth, &screenHeight);
@@ -125,7 +129,25 @@ void drawQuad(GLfloat *x, GLint numberOfPoints) {
 	glVertexPointer(3, GL_FLOAT, 0, points);
 	glDrawArrays(GL_QUAD_STRIP, 0, numberOfPoints);
 	glDisableClientState(GL_VERTEX_ARRAY);
+}
 
+void KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods) {
 
+	std::cout << key << std::endl;
+	if (key == GLFW_KEY_SPACE ) {
+		switch (action)
+		{
+		case GLFW_PRESS:
+			std::cout << "Space Key Pressed" << std::endl;
+			break;
+		case GLFW_REPEAT:
+			std::cout << "Space Key helddown" << std::endl;
+			break;
+		case GLFW_RELEASE:
+			std::cout << "Space Key released" << std::endl;
+			break;
+		}
+		
 
+}
 }
