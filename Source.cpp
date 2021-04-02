@@ -95,7 +95,7 @@ void drawCircle(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, GLint numberOfS
 
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(3, GL_FLOAT, 0, allCircleVertices);
-		glDrawArrays(GL_TRIANGLE_FAN, 0, numberOfVertices);
+		glDrawArrays(GL_LINE_STRIP, 0, numberOfVertices);
 		glDisableClientState(GL_VERTEX_ARRAY);
 
 
